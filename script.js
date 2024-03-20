@@ -1,9 +1,9 @@
 let items = [
     {
-        "id": 1710956720365,
-        "title": "Buy Stationery",
+        "id": 1710956734916,
+        "title": "Do Stationery",
         "description": "Pen, Pencil, Notebook",
-        "endDate": "2024-03-05",
+        "endDate": "2024-01-19",
         "priority": 1,
         "status": "todo"
     },
@@ -21,7 +21,7 @@ let items = [
         "description": "Baigan, potato, tomato, onion",
         "endDate": "2024-03-11",
         "priority": 0,
-        "status": "doing"
+        "status": "done"
     }
 ];
 
@@ -80,19 +80,23 @@ function displayItems() {
         const itemElement = document.createElement('div');
         itemElement.setAttribute('class', 'card')
         itemElement.innerHTML = `
-      <div>${item.title}
-      <select id="status-${item.id}"  onchange="statusChange(${item.id},this.value)">
-      <option value="todo" ${item.status === 'todo' ? 'selected' : ''}> To-do </option>
-      <option value="doing" ${item.status === 'doing' ? 'selected' : ''}> Doing </option>
-      <option value="done" ${item.status === 'done' ? 'selected' : ''}> Done </option></div>
-      </select>
-      <hr></hr>
+      <div style="display: flex; justify-content: space-between;">
+        <div>${item.title}
+        <select id="status-${item.id}"  onchange="statusChange(${item.id},this.value)">
+        <option value="todo" ${item.status === 'todo' ? 'selected' : ''}> To-do </option>
+        <option value="doing" ${item.status === 'doing' ? 'selected' : ''}> Doing </option>
+        <option value="done" ${item.status === 'done' ? 'selected' : ''}> Done </option></div>
+    </select>
+    </div>
+        <div>${parseInt(item.priority) === 0 ? "Low" : (parseInt(item.priority) === 1 ? "Medium" : "High")}</div>
+        <div>${item.endDate}</div>
+        </div>
+        <hr style="width: 100%;"></hr>
       <div>${item.description}</div>
-      <div>${item.endDate}</div>
-      <div>${parseInt(item.priority) === 0 ? "Low" : (parseInt(item.priority) === 1 ? "Medium" : "High")}</div>
+     
       <div style=" margin-left: auto; width: max-content;">
         <button class="button" onclick="editItem(${index})">Edit</button>
-        <button class="button" onclick="deleteItem(${index})">Delete</button>
+        <button class="button" onclick="deleteItem(${index})" style="background-color: #ff6961">Delete</button>
      </div>
     `;
 
@@ -109,7 +113,8 @@ function displayItems() {
 function statusChange(id, val) {
     console.log('id=', id, 'val=', val)
     const itemIndex = items.findIndex(el => el.id === id);
-    if (itemIndex) {
+    console.log(itemIndex, 'itemindex')
+    if (itemIndex >= 0) {
         items[itemIndex].status = val;
         console.log("Status changed:", items);
         displayItems();

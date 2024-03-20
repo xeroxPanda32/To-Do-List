@@ -4,7 +4,7 @@ body {
 
   .card {
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 10px;
     background-color: white;
     color : black;
@@ -40,15 +40,20 @@ body {
     }
 
   .button {
-    background-color: #13aa52;
-    border: 1px solid #13aa52;
+    background-color: #4dfaac;
+    border: 0px solid #13aa52;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
     box-sizing: border-box;
     color: #fff;
-    padding: 2px 18px
+    padding: 4px 18px
   }
   
+ .button:hover{
+    scale: 1.1;
+    cursor: pointer;
+ }
+
   #todo-list {
     padding: 4px;
     margin-bottom: 2px;
