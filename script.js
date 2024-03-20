@@ -42,8 +42,8 @@ function showAddForm() {
       <option value="doing"> Doing </option>
       <option value="done"> Done </option>
       </select>
-      <button onclick="addItem()">Add</button>
-      <button onclick="closeModal()">Cancel</button>
+      <button class="button"onclick="addItem()">Add</button>
+      <button class="button" onclick="closeModal()">Cancel</button>
     </div>
   `;
     modal.style.display = 'flex';
@@ -78,21 +78,22 @@ function displayItems() {
 
     items.forEach((item, index) => {
         const itemElement = document.createElement('div');
+        itemElement.setAttribute('class', 'card')
         itemElement.innerHTML = `
-      <div>${item.title}</div>
+      <div>${item.title}
+      <select id="status-${item.id}"  onchange="statusChange(${item.id},this.value)">
+      <option value="todo" ${item.status === 'todo' ? 'selected' : ''}> To-do </option>
+      <option value="doing" ${item.status === 'doing' ? 'selected' : ''}> Doing </option>
+      <option value="done" ${item.status === 'done' ? 'selected' : ''}> Done </option></div>
+      </select>
+      <hr></hr>
       <div>${item.description}</div>
       <div>${item.endDate}</div>
       <div>${parseInt(item.priority) === 0 ? "Low" : (parseInt(item.priority) === 1 ? "Medium" : "High")}</div>
-      <div>
-        <button onclick="editItem(${index})">Edit</button>
-        <button onclick="deleteItem(${index})">Delete</button>
-        <select id="status-${item.id}" onchange="statusChange(${item.id},this.value)">
-        <option value="todo" ${item.status === 'todo' ? 'selected' : ''}> To-do </option>
-        <option value="doing" ${item.status === 'doing' ? 'selected' : ''}> Doing </option>
-        <option value="done" ${item.status === 'done' ? 'selected' : ''}> Done </option>
-        </select>
-
-      </div>
+      <div style=" margin-left: auto; width: max-content;">
+        <button class="button" onclick="editItem(${index})">Edit</button>
+        <button class="button" onclick="deleteItem(${index})">Delete</button>
+     </div>
     `;
 
         if (item.status === "done") {
