@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>To Do List</h1>
+    <div class="actions">
+      <button onclick="showAddForm()">Add Item</button>
+      <label for="sort">Sort By:</label>
+      <select id="sort" onchange="sortItems()">
+        <option value="priority">Priority</option>
+        <option value="endDate">End Date</option>
+      </select>
+    </div>
+    <div class="lists">
+      <div class="list" >
+        <h2>To Do</h2>
+         <div id="todo-list">
+
+         </div>
+      </div>
+      <div class="list" >
+        <h2>Doing</h2>
+        <div id="doing-list">
+
+        </div>
+        <!-- Doing List Items Will Go Here -->
+      </div>
+      <div class="list" >
+        <h2>Done</h2>
+        <div id="done-list">
+
+        </div>
+        <!-- Done List Items Will Go Here -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="addModal">
+    <!-- Add Item Form Will Go Here -->
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
