@@ -58,7 +58,6 @@ function addItem() {
     const status = document.getElementById('status').value;
 
     items.push({ id, title, description, endDate, priority, status });
-    console.log(items)
     displayItems();
     closeModal();
 }
@@ -88,7 +87,7 @@ function displayItems() {
         <option value="done" ${item.status === 'done' ? 'selected' : ''}> Done </option></div>
     </select>
     </div>
-        <div>${parseInt(item.priority) === 0 ? "Low" : (parseInt(item.priority) === 1 ? "Medium" : "High")}</div>
+        <div>Priority-${parseInt(item.priority) === 0 ? "Low" : (parseInt(item.priority) === 1 ? "Medium" : "High")}</div>
         <div>${item.endDate}</div>
         </div>
         <hr style="width: 100%;"></hr>
@@ -97,6 +96,8 @@ function displayItems() {
       <div style=" margin-left: auto; width: max-content;">
         <button class="button" onclick="editItem(${index})">Edit</button>
         <button class="button" onclick="deleteItem(${index})" style="background-color: #ff6961">Delete</button>
+        <button id="myButton" class="button"  onclick="onComplete(${index})">${!item.completed ? "Complete" : "Completed"}</button>
+
      </div>
     `;
 
@@ -111,12 +112,9 @@ function displayItems() {
 }
 
 function statusChange(id, val) {
-    console.log('id=', id, 'val=', val)
     const itemIndex = items.findIndex(el => el.id === id);
-    console.log(itemIndex, 'itemindex')
     if (itemIndex >= 0) {
         items[itemIndex].status = val;
-        console.log("Status changed:", items);
         displayItems();
     } else {
         console.error("Item not found with ID:", id);
@@ -137,25 +135,22 @@ function editItem(index) {
         <option value=1 ${item.priority === 1 ? 'selected' : ''}>Medium</option>
         <option value=2 ${item.priority === 2 ? 'selected' : ''}>High</option>
       </select>
-      <button onclick="updateItem(${index})">Update</button>
-      <button onclick="closeModal()">Cancel</button>
+      <button class="button" onclick="updateItem(${index})">Update</button>
+      <button class="button" onclick="closeModal()">Cancel</button>
     </div>
   `;
     modal.style.display = 'flex';
 }
 
 function updateItem(index) {
-    // const id = document.getElementById('id').value;
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const endDate = document.getElementById('endDate').value;
     const priority = parseInt(document.getElementById('priority').value);
     const status = document.getElementById(`status-${items[index].id}`).value;
-    console.log(title, description, endDate, priority, status, '<<<<<<<<<<<<<<<<< updating')
 
     items[index] = { ...items[index], title, description, endDate, priority, status };
-    console.log(items[index], 'opdated<<<<<<<<<<<<<<<')
-    displayItems();
+     displayItems();
     closeModal();
 }
 
@@ -164,8 +159,8 @@ function deleteItem(index) {
     displayItems();
 }
 
-function completeItem(index) {
-    items[index].completed = true;
+function onComplete(index) {
+    items[index].completed = !items[index].completed;
     displayItems();
 }
 
@@ -176,11 +171,9 @@ function sortItems() {
     } else if (sortBy === 'endDate') {
         items.sort((a, b) => (new Date(a.endDate) > new Date(b.endDate) ? 1 : -1));
     }
-    console.log(items)
     displayItems();
 }
 
-// Initialize the application
 displayItems();
 
 

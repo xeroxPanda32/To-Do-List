@@ -19,7 +19,7 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(238, 232, 232);
     color: white
   }
   
@@ -39,6 +39,10 @@ body {
     
     }
 
+    #myButton {
+      background-color: lightblue;
+    }
+
   .button {
     background-color: #4dfaac;
     border: 0px solid #13aa52;
@@ -50,7 +54,7 @@ body {
   }
   
  .button:hover{
-    scale: 1.1;
+    scale: 0.9;
     cursor: pointer;
  }
 
@@ -89,7 +93,8 @@ body {
   
   .modal input,
   .modal select,
-  .modal button {
+  .modal button,
+  .modal textarea {
     margin-bottom: 10px;
     width: 100%;
   }
